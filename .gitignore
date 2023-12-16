@@ -1,3 +1,4 @@
 api
+main
 *.http
 ./src/api/database/database.db
