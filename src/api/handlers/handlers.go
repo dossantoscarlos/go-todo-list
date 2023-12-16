@@ -28,10 +28,17 @@ func ShowTodoListHandler(response http.ResponseWriter, request *http.Request) {
 
 	id, err := strconv.ParseInt(params["id"], 10, 64)
 	if err != nil {
-		fmt.Println("Erro ao converter a string para int64:", err)
+		message := map[string]string{"message": "Erro ao converter a string para int64"}
+		errorMessage, _ := json.Marshal(message)
+		http.Error(response, string(errorMessage), http.StatusBadRequest)
 		return
 	}
+
 	task, err := service.FindOneTask(id)
+	if err != nil {
+		http.Error(response, err.Error(), http.StatusInternalServerError)
+		return
+	}
 
 	data := map[string]interface{}{
 		"data": map[string]interface{}{
@@ -84,14 +91,14 @@ func UpdateTodoListHandler(response http.ResponseWriter, request *http.Request) 
 	id := param["id"]
 
 	headers := map[string]string{"Content-Type": "application/json"}
+
 	body, err := ioutil.ReadAll(request.Body)
-
-	data := map[string]interface{}{"id": id}
-
 	if err != nil {
 		http.Error(response, "Erro ao ler o corpo da requisição", http.StatusBadRequest)
 		return
 	}
+
+	data := map[string]interface{}{"id": id}
 
 	var todoList models.Task
 
