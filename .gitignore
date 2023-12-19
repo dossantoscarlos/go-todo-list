@@ -1,5 +1,4 @@
-api
 main
 *.http
-./src/api/database/database.db
-./vendor
+./api/database/database.db
+vendor
