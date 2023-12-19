@@ -2,3 +2,4 @@ main
 *.http
 ./api/database/database.db
 vendor
+go.sum
