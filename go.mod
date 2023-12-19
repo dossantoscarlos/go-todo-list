@@ -1,4 +1,4 @@
-module go-todo-list
+module github.com/dossantoscarlos/go-todo-list
 
 go 1.18
 

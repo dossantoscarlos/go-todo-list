@@ -11,7 +11,7 @@ import (
 
 func main() {
 
-	dir, err := filepath.Abs("../go-todo-list/src/api/db/")
+	dir, err := filepath.Abs("../go-todo-list/api/db/")
 	if err != nil {
 		log.Fatal(err)
 	}
